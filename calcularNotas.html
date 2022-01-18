@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Notas de DigitalHouse</title>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+}
+    </style>
+</head>
+<body>
+    <table>
+        <tr><td>Item: </td><td>Nota: </td></tr>
+        <tr><td>Parcial 1</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="parcial1"></td></tr>
+        <tr><td>Parcial 2</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="parcial2"></td></tr>
+        <tr><td>Final</td><td><input type="text" pattern="[0-9]*" inputmode="numeric" id="final"></td></tr>
+        <tr><td>PlayGround(en %)</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="pg"></td></tr>
+        <tr><td> Asistencia(en %)</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="asistencia"></td></tr>
+        <tr><td> Concepto</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="concepto"></td></tr>
+        
+    </table>
+    <br>
+    <button onclick="calcularPromedio()">Calcular Promedio</button>
+    <p id="mensaje"></p>
+</body>
+<script>
+    function calcularPromedio(){
+        //capturo valores
+        let notaParcial1 = document.getElementById("parcial1").value
+        let notaParcial2 = document.getElementById("parcial2").value
+        let notaDelFinal = document.getElementById("final").value
+        let notaPG = document.getElementById("pg").value
+        let notaAsistencia = document.getElementById("asistencia").value
+        let notaConcepto = document.getElementById("concepto").value
+        //variables de control
+        let notaFinal = 0; 
+        let minimoExamenes = 7
+        let minimoAsistencia = 7
+        let minimoPg = 80
+        let minimoConcepto = 7
+        //controlo y hago los strikes
+        
+        let strikes = 0
+        if (notaParcial1<minimoExamenes){strikes =+1}
+        if (notaParcial2<minimoExamenes){strikes =+1}
+        if (notaDelFinal<minimoExamenes){strikes =+2}
+        if (notaPG<minimoPg){strikes =+0}
+        if (notaAsistencia<minimoAsistencia){strikes =+1}
+        if (notaConcepto<minimoConcepto){strikes =+1}
+        let mensajeFinal
+        if( strikes >= 2){
+            mensajeFinal = "Recursa"
+        }
+=SI(Q2>=2;"Recursa";SI(P2>0;"Recupera final";SI(O2>1;"Recupera Concepto";SI(N2>0;"Recupera PlayGround";SI(M2>0;"Recupera Parcial";"Aprueba" )))))
+        
+
+
+
+        //devuelvo
+        
+        document.getElementById("mensaje").innerText=mensajeFinal
+    }
+    
+</script>
+</html>
