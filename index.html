@@ -105,22 +105,21 @@ img{width:15%}
         }
         let promedioParciales = (parseInt(notaParcial1)+parseInt(notaParcial2))/2
         
-        if (promedioParciales<minimoExamenes){strikes = strikes +1}
+        if (promedioParciales<minimoExamenes){strikes = strikes +1; item = "Parcial"}
         
         
-        if (notaDelFinal<minimoExamenes){ 
-        strikes = strikes + 1}
+        if (notaDelFinal<minimoExamenes){strikes = strikes + 1; item = "Final"}
         
-        if (notaPG<minimoPg){strikes = strikes + 1}
-        if (notaAsistencia<minimoAsistencia){strikes = strikes +1}
-        if (notaConcepto<minimoConcepto){strikes = strikes +1} 
+        if (notaPG<minimoPg){strikes = strikes + 1; item = "PlayGround"}
+        if (notaAsistencia<minimoAsistencia){strikes = strikes +1; item = "Asistencia"}
+        if (notaConcepto<minimoConcepto){strikes = strikes +1; item = "Concepto"} 
         let mensajeFinal
         
         if( strikes >= 2){
             document.getElementById("mensaje").innerText="Debe recursar la materia"
         }
         if(strikes == 1){
-            document.getElementById("mensaje").innerText="Debe recuperar el item desaprobado"
+            document.getElementById("mensaje").innerText=`Debe recuperar el item desaprobado: ${item}`
         }
         if(strikes == 0){
             document.getElementById("mensaje").innerText="Tiene aprobada la materia"
