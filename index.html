@@ -63,7 +63,7 @@ img{width:15%}
         <tr><td>Parcial 2 (mínimo 7)</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="parcial2"></td></tr>
         <tr><td>Final (mínimo 7)</td><td><input type="text" pattern="[0-9]*" inputmode="numeric" id="final"></td></tr>
         <tr><td>PlayGround(en %, mínimo 80%)</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="pg"></td></tr>
-        <tr><td> Asistencia(en %, mínimo 80%)</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="asistencia"></td></tr>
+        <tr><td> Asistencia(en %, mínimo 90%)</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="asistencia"></td></tr>
         <tr><td> Concepto(mínimo 7)</td><td><input pattern="[0-9]*" inputmode="numeric" type="text" id="concepto"></td></tr>
         
     </table>
@@ -77,6 +77,7 @@ img{width:15%}
 </body>
 <script>
     function calcularPromedio(){
+        
         //capturo valores
         let notaParcial1 = document.getElementById("parcial1").value
         let notaParcial2 = document.getElementById("parcial2").value
@@ -87,21 +88,34 @@ img{width:15%}
         //variables de control
         let notaFinal = 0; 
         let minimoExamenes = 7
-        let minimoAsistencia = 7
+        let minimoAsistencia = 90
         let minimoPg = 80
         let minimoConcepto = 7
         //controlo y hago los strikes
         let strikes = 0
-        if (notaParcial1<minimoExamenes){strikes = strikes +1}
-        if (notaParcial2<minimoExamenes){strikes = strikes +1}
-        if (notaDelFinal<minimoExamenes){ console.log("hola") 
-        strikes = strikes + 2}
-        console.log(strikes)
-        if (notaPG<minimoPg){strikes = strikes + 0}
+        
+        if (notaParcial2 == ""){
+            
+            notaParcial2 = notaParcial1
+            
+        }else{
+            
+            notaParcial2 == document.getElementById("parcial2").value
+            
+        }
+        let promedioParciales = (parseInt(notaParcial1)+parseInt(notaParcial2))/2
+        
+        if (promedioParciales<minimoExamenes){strikes = strikes +1}
+        
+        
+        if (notaDelFinal<minimoExamenes){ 
+        strikes = strikes + 1}
+        
+        if (notaPG<minimoPg){strikes = strikes + 1}
         if (notaAsistencia<minimoAsistencia){strikes = strikes +1}
         if (notaConcepto<minimoConcepto){strikes = strikes +1} 
         let mensajeFinal
-        console.log(strikes)
+        
         if( strikes >= 2){
             document.getElementById("mensaje").innerText="Debe recursar la materia"
         }
